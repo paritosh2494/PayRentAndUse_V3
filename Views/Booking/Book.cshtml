@@ -1,0 +1,85 @@
+﻿@model PayRentAndUse_V3.Models.BookingClass
+
+@{
+    ViewBag.Title = "Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Vehicle Booking</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("User Name : ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("User Name", new { htmlAttributes = new { @class = "form-control", @Value = ViewData["UserName"], @readonly = "readonly" } })
+                @Html.EditorFor(model => model.UserClassId, new { htmlAttributes = new { @class = "form-control", @Value = ViewData["UId"], @type = "hidden" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Vendor Name : ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("Vendor Name", new { htmlAttributes = new { @class = "form-control", @Value = ViewData["VendorName"], @readonly = "readonly" } })
+                @Html.EditorFor(model => model.VendorClassId, new { htmlAttributes = new { @class = "form-control", @Value = ViewData["VId"], @type = "hidden" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Vehicle Name : ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("Vehicle Name", new { htmlAttributes = new { @class = "form-control", @Value = ViewData["VehicleName"], @readonly = "readonly" } })
+                @Html.EditorFor(model => model.VehicleClassId, new { htmlAttributes = new { @class = "form-control", @Value = ViewData["VHId"], @type = "hidden" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Vehicle Available For Booking : ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("Vehicle Available For Booking", new { htmlAttributes = new { @class = "form-control", @Value = ViewData["AvailableVehicle"], @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RequiredVehicle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RequiredVehicle, new { htmlAttributes = new { @class = "form-control", @max = ViewData["AvailableVehicle"] } })
+                @Html.ValidationMessageFor(model => model.RequiredVehicle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FromBookingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FromBookingDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FromBookingDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ToBookingDate, htmlAttributes: new { @class = "control-label col-md-2" , @onchange = "GetPayment()" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ToBookingDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ToBookingDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="Buttons" class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" name="Book" value="Book and Pay" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Vendors", "VendorDetail", "Vendor")
+</div>
+
+

@@ -1,0 +1,36 @@
+﻿@model PayRentAndUse_V3.Models.BookingClass
+@{
+    ViewBag.Title = "ConfirmPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Confirm Payment</h2>
+<li><b>User Name : </b> @ViewData["UserName"]</li>
+<li><b>Vendor Name : </b> @ViewData["VendorName"]</li>
+<li><b>From Date : </b> @Model.FromBookingDate </li>
+<li><b>To Date : </b> @Model.ToBookingDate </li>
+<li><b>Total Vehicle Booked :</b>@Model.RequiredVehicle</li>
+<li><b>Total Days : </b> @ViewData["Days"] </li>
+<li><b>Amount Payable : </b> Rs. @Model.PaymentAmount </li>
+<p id="vendor">
+    <button class="btn btn-primary js-book">Pay</button>
+</p>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#vendor .js-book").on("click", function () {
+
+                bootbox.confirm("Confirm Payment?", function (result) {
+                    if (result) {
+                        var url = "/home/index";
+                        window.location.href = url; 
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+

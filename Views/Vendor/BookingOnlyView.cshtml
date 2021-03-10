@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PayRentAndUse_V3.Models.VendorClass>
+@{
+    ViewBag.Title = "VendorDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Vendors</h2>
+<table id="vendor" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Vendors</th>
+            <th>Vehicle Available for Booking</th>
+            <th>Vehicle Name</th>
+            <th>Click for Booking</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vendorClass in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(vendorClass.Name, "Details", "Vendor", new { id = vendorClass.Id }, null)</td>
+                <td>@vendorClass.AvailableVehicle</td>
+                <td>@vendorClass.VehicleClass.Name</td>
+                @if (vendorClass.AvailableVehicle > 0)
+                {
+                    <td>@Html.ActionLink("Book", "Book", "Booking", new { id = vendorClass.Id }, null)</td>
+                }
+                else
+                {
+                    <td>Booking Not Avaliable</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+

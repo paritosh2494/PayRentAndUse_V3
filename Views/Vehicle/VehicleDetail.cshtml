@@ -1,0 +1,31 @@
+﻿@model IEnumerable<PayRentAndUse_V3.Models.VehicleClass>
+@{
+    ViewBag.Title = "VehicleDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Vehicle Detail</h2>
+<p>
+    @Html.ActionLink("Add Vehicle", "Registration", "Vehicle", null, new { @class = "btn btn-primary" })
+</p>
+<table id="vehicle" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Vehicle</th>
+            <th>Manufactured On</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model)
+        {
+            <tr>
+                <td>@vehicle.Name</td>
+                <td>@vehicle.YearManufactured</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Vehicle", new { id = vehicle.Id }, null)  / @Html.ActionLink("Delete", "Delete", "Vehicle", new { id = vehicle.Id }, null)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

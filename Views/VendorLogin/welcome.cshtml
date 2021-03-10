@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "welcome";
+}
+@if (Session["Name"] != null)
+{
+    <h2>Welcome @Session["Name"].ToString()</h2>
+    using (Html.BeginForm("Logout", "VendorLogin", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+    }
+
+}

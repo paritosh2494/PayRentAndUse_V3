@@ -1,0 +1,26 @@
+﻿@model IEnumerable<PayRentAndUse_V3.Models.VehicleClass>
+@{
+    ViewBag.Title = "VehicleDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Vehicle Detail</h2>
+<table id="vehicle" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Vehicle</th>
+            <th>Manufactured On</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model)
+        {
+            <tr>
+                <td>@vehicle.Name</td>
+                <td>@vehicle.YearManufactured</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

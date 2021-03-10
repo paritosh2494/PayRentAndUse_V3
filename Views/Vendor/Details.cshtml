@@ -1,0 +1,18 @@
+﻿@model PayRentAndUse_V3.Models.VendorClass
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name Details</h2>
+<ul>
+    <li><b>Name : </b> @Model.Name</li>
+    <li><b>Email : </b> @Model.Email</li>
+    <li><b>Vehicle Owner : </b> @Model.VehicleClass.Name </li>
+    <li><b>No. of Vehicle : </b> @Model.VehicleCount</li>
+    <li><b>Vehicle Available For Booking : </b> @Model.AvailableVehicle</li>
+    <li><b>Vehicle Booked : </b> @Model.BookedVehicle</li>
+    <li><b>Vehicle Manufactured on : </b> @Model.VehicleClass.YearManufactured</li>
+    <li><b>Date Added : </b> @Model.DateAdded.ToLongDateString()</li>
+</ul>
+

@@ -1,0 +1,91 @@
+﻿@model PayRentAndUse_V3.ViewModel.NewVendorViewModel
+
+@{
+    ViewBag.Title = "Registration";
+}
+
+@if (ViewContext.RouteData.GetRequiredString("action") == "Edit")
+{
+    <h2>Update Vendor Details</h2>
+}
+else
+{
+    <h2>Vendor Registration</h2>
+}
+
+
+@using (Html.BeginForm("Registration", "Vendor",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.VendorClass.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VendorClass.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VendorClass.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VendorClass.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VendorClass.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VendorClass.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VendorClass.VendorPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VendorClass.VendorPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VendorClass.VendorPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VendorClass.VendorRePassword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VendorClass.VendorRePassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VendorClass.VendorRePassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VendorClass.VehicleClassId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.VendorClass.VehicleClassId, new SelectList(Model.VehicleClasses, "Id", "Name"), "Select Vehicle", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VendorClass.VehicleClassId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VendorClass.VehicleCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VendorClass.VehicleCount, new { htmlAttributes = new { @class = "form-control", @min = ViewData["BookedVehicle"] } })
+                @Html.ValidationMessageFor(model => model.VendorClass.VehicleCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.VendorClass.Id)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @if (ViewContext.RouteData.GetRequiredString("action") == "Edit")
+                {
+                    <input type="submit" value="Save" class="btn btn-default" />
+                }
+                else
+                {
+                    <input type="submit" value="Register" class="btn btn-default" />
+                }
+            </div>
+        </div>
+        @Html.ViewData["Message"]
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Vendors", "VendorDetail","Vendor")
+</div>
+
